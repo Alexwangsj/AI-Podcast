@@ -7,13 +7,24 @@ Private feed URLs, random paths, and personal subscription instructions are inte
 
 ## Setup
 
-1. Create `.env` locally:
+1. Run local setup:
 
 ```bash
-cp .env.example .env
+./scripts/setup_local.sh
 ```
 
-2. Install dependencies:
+2. Restore local publishing config in `.env`.
+
+If `.env` was just created from the public example, replace the placeholders:
+
+```bash
+PODCAST_BASE_URL=https://example.github.io/example-repo
+PODCAST_PRIVATE_PATH=replace_with_private_random_path
+```
+
+Use your private GitHub Pages base URL and random podcast path. Do not commit `.env`.
+
+If setup needs to be run manually:
 
 ```bash
 python3 -m venv .venv
@@ -40,7 +51,13 @@ TTS_BACKEND=openai
 OPENAI_API_KEY=replace_me
 ```
 
-4. Generate an episode from prepared notes and speech text:
+4. Check the local environment:
+
+```bash
+.venv/bin/python scripts/doctor.py
+```
+
+5. Generate an episode from prepared notes and speech text:
 
 ```bash
 .venv/bin/python scripts/new_episode.py \
@@ -51,7 +68,7 @@ OPENAI_API_KEY=replace_me
   --script-file /path/to/speech.txt
 ```
 
-5. Commit and push:
+6. Commit and push:
 
 ```bash
 git add docs scripts README.md requirements.txt .env.example
@@ -63,6 +80,17 @@ git push
 
 - `ai-daily`: daily AI news briefing.
 - `research`: ad hoc research briefing.
+
+## Codex Usage
+
+This repo includes:
+
+- `AGENTS.md`: repo guidance for Codex.
+- `.agents/skills/ai-research-podcast/SKILL.md`: repo-scoped podcast workflow skill.
+- `scripts/setup_local.sh`: new-machine setup.
+- `scripts/doctor.py`: local readiness check.
+
+After cloning on a new computer, open this repository in Codex and ask it to use the `ai-research-podcast` skill.
 
 ## Privacy
 
