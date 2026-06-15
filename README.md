@@ -89,8 +89,28 @@ This repo includes:
 - `.agents/skills/ai-research-podcast/SKILL.md`: repo-scoped podcast workflow skill.
 - `scripts/setup_local.sh`: new-machine setup.
 - `scripts/doctor.py`: local readiness check.
+- `prompts/daily_ai_podcast.md`: daily AI research podcast automation prompt.
+- `scripts/run_daily_ai_podcast.sh`: daily automation runner.
 
 After cloning on a new computer, open this repository in Codex and ask it to use the `ai-research-podcast` skill.
+
+## Daily Automation
+
+Install the macOS daily job:
+
+```bash
+./scripts/install_daily_launchd.sh
+```
+
+It runs every day at 07:30 local time and asks Codex CLI to create an `ai-daily` episode covering the last two days of AI news and research.
+
+Logs are written to `logs/`, which is intentionally ignored by git.
+
+Uninstall:
+
+```bash
+./scripts/uninstall_daily_launchd.sh
+```
 
 ## Privacy
 

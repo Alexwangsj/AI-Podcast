@@ -62,3 +62,15 @@ The usual command shape is:
 ```
 
 Use `--channel research` for ad hoc research topics.
+
+## Daily Automation
+
+The daily automation prompt lives at `prompts/daily_ai_podcast.md`.
+
+To install the macOS schedule:
+
+```bash
+./scripts/install_daily_launchd.sh
+```
+
+The launchd job runs `scripts/run_daily_ai_podcast.sh` every day at 07:30 local time.

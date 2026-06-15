@@ -68,6 +68,22 @@ git push
 
 Do not commit `.env`, `.venv`, `tmp/`, or private local setup notes.
 
+## Daily Automation
+
+For the recurring AI daily research podcast, use `prompts/daily_ai_podcast.md`.
+
+The macOS scheduled runner is:
+
+```bash
+./scripts/run_daily_ai_podcast.sh
+```
+
+Install the 07:30 local-time launchd job with:
+
+```bash
+./scripts/install_daily_launchd.sh
+```
+
 ## Episode Standards
 
 - Target length: about 20 minutes unless the user requests otherwise.
