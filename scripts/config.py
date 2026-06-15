@@ -7,8 +7,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DOCS_DIR = ROOT / "docs"
 
-DEFAULT_PRIVATE_PATH = "radio-rJ5DwUcy9jXQtZ94ek9A1NZs"
-DEFAULT_BASE_URL = "https://alexwangsj.github.io/AI-Podcast"
+DEFAULT_PRIVATE_PATH = "replace_with_private_random_path"
+DEFAULT_BASE_URL = "https://example.github.io/example-repo"
 
 
 def load_dotenv(path: Path | None = None) -> None:
@@ -29,8 +29,13 @@ load_dotenv()
 
 PODCAST_BASE_URL = os.environ.get("PODCAST_BASE_URL", DEFAULT_BASE_URL).rstrip("/")
 PODCAST_PRIVATE_PATH = os.environ.get("PODCAST_PRIVATE_PATH", DEFAULT_PRIVATE_PATH).strip("/")
+TTS_BACKEND = os.environ.get("TTS_BACKEND", "edge").strip().lower()
 OPENAI_TTS_MODEL = os.environ.get("OPENAI_TTS_MODEL", "gpt-4o-mini-tts")
 OPENAI_TTS_VOICE = os.environ.get("OPENAI_TTS_VOICE", "coral")
+EDGE_TTS_VOICE = os.environ.get("EDGE_TTS_VOICE", "zh-CN-YunjianNeural")
+EDGE_TTS_RATE = os.environ.get("EDGE_TTS_RATE", "+0%")
+EDGE_TTS_PITCH = os.environ.get("EDGE_TTS_PITCH", "+0Hz")
+EDGE_TTS_VOLUME = os.environ.get("EDGE_TTS_VOLUME", "+0%")
 
 CHANNELS = {
     "ai-daily": {
@@ -56,4 +61,3 @@ def channel_url(channel: str) -> str:
     if channel not in CHANNELS:
         raise ValueError(f"Unknown channel: {channel}")
     return f"{PODCAST_BASE_URL}/{PODCAST_PRIVATE_PATH}/{channel}"
-
