@@ -44,10 +44,8 @@ fi
 
 git pull --ff-only
 
-"$CODEX_BIN" --search exec \
+"$CODEX_BIN" --search --dangerously-bypass-approvals-and-sandbox exec \
   --cd "$REPO_DIR" \
-  --sandbox danger-full-access \
-  --ask-for-approval never \
   --output-last-message "$LAST_MESSAGE" \
   - < prompts/daily_ai_podcast.md
 
