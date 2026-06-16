@@ -17,6 +17,13 @@ cd "$REPO_DIR"
 
 export PATH="$HOME/.local/node/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
+if [[ -f ".env" ]]; then
+  set -a
+  # shellcheck disable=SC1091
+  source .env
+  set +a
+fi
+
 if ! command -v "$CODEX_BIN" >/dev/null 2>&1; then
   echo "codex CLI not found. Set CODEX_BIN or add codex to PATH."
   exit 1

@@ -32,6 +32,13 @@ EDGE_TTS_VOICE=zh-CN-YunjianNeural
 EDGE_TTS_RATE=-15%
 ```
 
+If the machine needs a proxy for GitHub or OpenAI API access, `.env` may also include:
+
+```bash
+HTTP_PROXY=http://proxy.nioint.com:8080
+HTTPS_PROXY=http://proxy.nioint.com:8080
+```
+
 ## Validation
 
 Before generating or publishing an episode, run:

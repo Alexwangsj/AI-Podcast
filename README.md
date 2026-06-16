@@ -34,6 +34,13 @@ HTTPS_PROXY=http://proxy.nioint.com:8080 HTTP_PROXY=http://proxy.nioint.com:8080
 
 If your network does not need a proxy, omit the `HTTPS_PROXY` and `HTTP_PROXY` prefix.
 
+If scheduled GitHub access needs a proxy, keep these in local `.env`:
+
+```bash
+HTTP_PROXY=http://proxy.nioint.com:8080
+HTTPS_PROXY=http://proxy.nioint.com:8080
+```
+
 3. Choose a TTS backend in `.env`.
 
 Free Edge TTS:
