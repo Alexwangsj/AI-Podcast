@@ -5,8 +5,16 @@
     <link>https://alexwangsj.github.io/AI-Podcast/radio-rJ5DwUcy9jXQtZ94ek9A1NZs/ai-daily/feed.xml</link>
     <description>A 20-minute Chinese AI news briefing.</description>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 15 Jun 2026 06:50:13 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jun 2026 00:34:24 +0000</lastBuildDate>
     <generator>AI Podcast scripts</generator>
+    <item>
+      <title>AI研究日报 2026-06-16</title>
+      <description>过去两天国内外AI大事件、技术进展、研究与产业动态的20分钟中文播报。</description>
+      <pubDate>Tue, 16 Jun 2026 00:34:24 +0000</pubDate>
+      <guid isPermaLink="false">ai-daily-2026-06-16-ai研究日报-2026-06-16</guid>
+      <link>https://alexwangsj.github.io/AI-Podcast/radio-rJ5DwUcy9jXQtZ94ek9A1NZs/ai-daily/notes/2026-06-16-ai研究日报-2026-06-16.md</link>
+      <enclosure url="https://alexwangsj.github.io/AI-Podcast/radio-rJ5DwUcy9jXQtZ94ek9A1NZs/ai-daily/episodes/2026-06-16-ai研究日报-2026-06-16.mp3" length="8252012" type="audio/mpeg" />
+    </item>
     <item>
       <title>最近7天AI新闻与技术周报 Edge语音版 2026-06-15</title>
       <description>最近7天AI新闻、技术进展和产业动态的20分钟中文播报，使用Edge TTS重新生成。</description>
