@@ -33,7 +33,7 @@ TTS_BACKEND = os.environ.get("TTS_BACKEND", "edge").strip().lower()
 OPENAI_TTS_MODEL = os.environ.get("OPENAI_TTS_MODEL", "gpt-4o-mini-tts")
 OPENAI_TTS_VOICE = os.environ.get("OPENAI_TTS_VOICE", "coral")
 EDGE_TTS_VOICE = os.environ.get("EDGE_TTS_VOICE", "zh-CN-YunjianNeural")
-EDGE_TTS_RATE = os.environ.get("EDGE_TTS_RATE", "-15%")
+EDGE_TTS_RATE = os.environ.get("EDGE_TTS_RATE", "+50%")
 EDGE_TTS_PITCH = os.environ.get("EDGE_TTS_PITCH", "+0Hz")
 EDGE_TTS_VOLUME = os.environ.get("EDGE_TTS_VOLUME", "+0%")
 

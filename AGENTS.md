@@ -29,7 +29,7 @@ PODCAST_BASE_URL=<real GitHub Pages base URL>
 PODCAST_PRIVATE_PATH=<real random path>
 TTS_BACKEND=edge
 EDGE_TTS_VOICE=zh-CN-YunjianNeural
-EDGE_TTS_RATE=-15%
+EDGE_TTS_RATE=+50%
 ```
 
 If the machine needs a proxy for GitHub or OpenAI API access, `.env` may also include:

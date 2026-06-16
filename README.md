@@ -48,7 +48,7 @@ Free Edge TTS:
 ```bash
 TTS_BACKEND=edge
 EDGE_TTS_VOICE=zh-CN-YunjianNeural
-EDGE_TTS_RATE=-15%
+EDGE_TTS_RATE=+50%
 ```
 
 OpenAI TTS:
