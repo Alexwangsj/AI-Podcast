@@ -37,6 +37,9 @@ EDGE_TTS_RATE = os.environ.get("EDGE_TTS_RATE", "+25%")
 EDGE_TTS_PITCH = os.environ.get("EDGE_TTS_PITCH", "+0Hz")
 EDGE_TTS_VOLUME = os.environ.get("EDGE_TTS_VOLUME", "+0%")
 
+_archive_dir = Path(os.environ.get("ARCHIVE_DIR", "archive")).expanduser()
+ARCHIVE_DIR = _archive_dir if _archive_dir.is_absolute() else ROOT / _archive_dir
+
 CHANNELS = {
     "ai-daily": {
         "title": "AI Podcast - Daily",

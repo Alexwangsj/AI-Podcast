@@ -7,6 +7,7 @@ This repository publishes static podcast RSS feeds and MP3 episodes through GitH
 - Do not commit `.env`, API keys, access tokens, private feed URLs, or the real random podcast path into documentation.
 - Public docs may mention placeholders only, such as `replace_with_private_random_path`.
 - Generated files under `docs/` are public once pushed.
+- Generated archive documents under `archive/` are local-only and must not be committed.
 
 ## Local Setup
 
@@ -30,6 +31,7 @@ PODCAST_PRIVATE_PATH=<real random path>
 TTS_BACKEND=edge
 EDGE_TTS_VOICE=zh-CN-YunjianNeural
 EDGE_TTS_RATE=+25%
+ARCHIVE_DIR=archive
 ```
 
 If the machine needs a proxy for GitHub or OpenAI API access, `.env` may also include:
@@ -69,6 +71,8 @@ The usual command shape is:
 ```
 
 Use `--channel research` for ad hoc research topics.
+
+Each successful `scripts/new_episode.py` run also writes a local Markdown archive document under `archive/<channel>/`. The archive includes episode metadata, the research notes, and the spoken script. Keep `archive/` out of git.
 
 ## Daily Automation
 

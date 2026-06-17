@@ -49,6 +49,7 @@ Free Edge TTS:
 TTS_BACKEND=edge
 EDGE_TTS_VOICE=zh-CN-YunjianNeural
 EDGE_TTS_RATE=+25%
+ARCHIVE_DIR=archive
 ```
 
 OpenAI TTS:
@@ -74,6 +75,9 @@ OPENAI_API_KEY=replace_me
   --notes-file /path/to/notes.md \
   --script-file /path/to/speech.txt
 ```
+
+Each generated episode also writes a local archive document under `archive/<channel>/`.
+The archive contains the episode metadata, research notes, and spoken script. `archive/` is ignored by git.
 
 6. Commit and push:
 

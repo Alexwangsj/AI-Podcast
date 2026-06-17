@@ -9,6 +9,7 @@ from pathlib import Path
 
 from build_feed import write_feed
 from config import (
+    ARCHIVE_DIR,
     CHANNELS,
     EDGE_TTS_PITCH,
     EDGE_TTS_RATE,
@@ -60,6 +61,43 @@ def synthesize_audio(
     raise ValueError(f"Unknown TTS backend: {backend}")
 
 
+def build_archive_document(
+    *,
+    metadata: dict[str, str],
+    notes_text: str,
+    speech_text: str,
+    tts_backend: str,
+    edge_voice: str,
+    edge_rate: str,
+) -> str:
+    return "\n".join(
+        [
+            f"# {metadata['title']}",
+            "",
+            "## 播客信息",
+            "",
+            f"- 频道：`{metadata['channel']}`",
+            f"- 发布日期：`{metadata['pub_date']}`",
+            f"- 摘要：{metadata['summary'] or '无'}",
+            f"- 音频文件：`{metadata['audio_file']}`",
+            f"- 公开 notes 文件：`{metadata['notes_file']}`",
+            f"- 播报稿文件：`{metadata['script_file']}`",
+            f"- TTS：`{tts_backend}`",
+            f"- Edge 声音：`{edge_voice}`",
+            f"- Edge 语速：`{edge_rate}`",
+            "",
+            "## 研究文档",
+            "",
+            notes_text.rstrip(),
+            "",
+            "## 播报稿",
+            "",
+            speech_text.rstrip(),
+            "",
+        ]
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Create a podcast episode and rebuild the RSS feed.")
     parser.add_argument("--channel", choices=sorted(CHANNELS), required=True)
@@ -92,13 +130,15 @@ def main() -> None:
     audio_name = f"{slug}.mp3"
     metadata_name = f"{slug}.json"
 
-    shutil.copyfile(args.notes_file, notes_dir / notes_name)
-    shutil.copyfile(args.script_file, notes_dir / script_name)
+    notes_text = args.notes_file.read_text(encoding="utf-8")
+    speech_text = args.script_file.read_text(encoding="utf-8")
+
+    (notes_dir / notes_name).write_text(notes_text, encoding="utf-8")
+    (notes_dir / script_name).write_text(speech_text, encoding="utf-8")
 
     if args.audio_file:
         shutil.copyfile(args.audio_file, episodes_dir / audio_name)
     elif not args.no_tts:
-        speech_text = args.script_file.read_text(encoding="utf-8")
         synthesize_audio(
             speech_text,
             episodes_dir / audio_name,
@@ -126,9 +166,29 @@ def main() -> None:
         "audio_file": audio_name,
     }
     (notes_dir / metadata_name).write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8")
+    archive_dir = ARCHIVE_DIR / args.channel
+    archive_dir.mkdir(parents=True, exist_ok=True)
+    archive_path = archive_dir / notes_name
+    archive_path.write_text(
+        build_archive_document(
+            metadata=metadata,
+            notes_text=notes_text,
+            speech_text=speech_text,
+            tts_backend=args.tts_backend,
+            edge_voice=args.edge_voice,
+            edge_rate=args.edge_rate,
+        ),
+        encoding="utf-8",
+    )
     feed_path = write_feed(args.channel)
 
-    print(json.dumps({"episode": metadata, "feed": str(feed_path)}, ensure_ascii=False, indent=2))
+    print(
+        json.dumps(
+            {"episode": metadata, "feed": str(feed_path), "archive": str(archive_path)},
+            ensure_ascii=False,
+            indent=2,
+        )
+    )
 
 
 if __name__ == "__main__":

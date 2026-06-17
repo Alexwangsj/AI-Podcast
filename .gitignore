@@ -5,4 +5,5 @@ __pycache__/
 .venv/
 tmp/
 logs/
+archive/
 *.part.mp3

@@ -11,6 +11,7 @@ Use this skill to produce a publishable podcast episode from this repository.
 
 - Never commit `.env`, API keys, private feed URLs, or the real random podcast path into README or public docs.
 - `docs/` is public once pushed to GitHub Pages.
+- `archive/` is local-only and ignored by git. Every generated episode should leave a Markdown archive document there.
 - Use placeholders in committed instructions and read real publishing configuration from local `.env`.
 
 ## Setup Check
@@ -52,6 +53,7 @@ Default TTS backend is free Edge TTS (`TTS_BACKEND=edge`). Use OpenAI only when 
 
 4. Verify:
    - Confirm the command produced an MP3 under `docs/.../<channel>/episodes/`.
+   - Confirm the command printed an `archive` path under `archive/<channel>/`.
    - Confirm the generated MP3 is close to the requested target duration.
    - Confirm `docs/.../<channel>/feed.xml` contains the new item.
    - Run `.venv/bin/python scripts/doctor.py`.
@@ -66,7 +68,7 @@ git commit -m "Add <episode title> podcast episode"
 git push
 ```
 
-Do not commit `.env`, `.venv`, `tmp/`, or private local setup notes.
+Do not commit `.env`, `.venv`, `tmp/`, `archive/`, or private local setup notes.
 
 ## Daily Automation
 

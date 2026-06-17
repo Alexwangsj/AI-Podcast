@@ -47,6 +47,7 @@ ffprobe -v error -show_entries format=duration,size -of default=nw=1 <generated-
 ```
 
 Confirm the generated MP3 is roughly 18 to 23 minutes. If the duration is too short, expand the speech script before publishing.
+Confirm `scripts/new_episode.py` printed an `archive` path under `archive/ai-daily/`; this local archive document is intentionally not committed.
 
 ## Publish
 
@@ -59,6 +60,6 @@ git commit -m "Add AI daily research podcast <YYYY-MM-DD>"
 git push
 ```
 
-Do not commit `.env`, `.venv`, `tmp/`, `logs/`, or private local notes.
+Do not commit `.env`, `.venv`, `tmp/`, `logs/`, `archive/`, or private local notes.
 
 If there are unrelated uncommitted user changes, stop and explain instead of overwriting or staging them.
