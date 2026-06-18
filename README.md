@@ -77,7 +77,7 @@ OPENAI_API_KEY=replace_me
 ```
 
 Each generated episode also writes a local archive document under `archive/<channel>/`.
-The archive contains the episode metadata, research notes, and spoken script. `archive/` is ignored by git.
+For `ai-daily`, the archive contains episode metadata and news notes only. For `research`, it may also include the spoken script. `archive/` is ignored by git.
 
 6. Commit and push:
 

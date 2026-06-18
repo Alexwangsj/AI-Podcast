@@ -72,7 +72,7 @@ The usual command shape is:
 
 Use `--channel research` for ad hoc research topics.
 
-Each successful `scripts/new_episode.py` run also writes a local Markdown archive document under `archive/<channel>/`. The archive includes episode metadata, the research notes, and the spoken script. Keep `archive/` out of git.
+Each successful `scripts/new_episode.py` run also writes a local Markdown archive document under `archive/<channel>/`. For `ai-daily`, the archive keeps only episode metadata and news notes; the speech script is only a TTS input. For `research`, the archive may include the spoken script. Keep `archive/` out of git.
 
 ## Daily Automation
 

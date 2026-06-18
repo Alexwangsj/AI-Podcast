@@ -4,7 +4,7 @@ import argparse
 import json
 import re
 import shutil
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 from build_feed import write_feed
@@ -27,6 +27,16 @@ def slugify(value: str) -> str:
     value = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "-", value)
     value = value.strip("-")
     return value[:60] or "episode"
+
+
+def remove_date_from_title(title: str, date_text: str) -> str:
+    without_date = title.replace(date_text, "")
+    without_date = re.sub(r"\s+", " ", without_date)
+    return without_date.strip(" -_") or title
+
+
+def episode_slug(date_text: str, title: str) -> str:
+    return f"{date_text}-{slugify(remove_date_from_title(title, date_text))}"
 
 
 def synthesize_audio(
@@ -66,36 +76,44 @@ def build_archive_document(
     metadata: dict[str, str],
     notes_text: str,
     speech_text: str,
+    include_speech: bool,
     tts_backend: str,
     edge_voice: str,
     edge_rate: str,
 ) -> str:
-    return "\n".join(
-        [
-            f"# {metadata['title']}",
-            "",
-            "## 播客信息",
-            "",
-            f"- 频道：`{metadata['channel']}`",
-            f"- 发布日期：`{metadata['pub_date']}`",
-            f"- 摘要：{metadata['summary'] or '无'}",
-            f"- 音频文件：`{metadata['audio_file']}`",
-            f"- 公开 notes 文件：`{metadata['notes_file']}`",
-            f"- 播报稿文件：`{metadata['script_file']}`",
-            f"- TTS：`{tts_backend}`",
-            f"- Edge 声音：`{edge_voice}`",
-            f"- Edge 语速：`{edge_rate}`",
-            "",
-            "## 研究文档",
-            "",
-            notes_text.rstrip(),
-            "",
-            "## 播报稿",
-            "",
-            speech_text.rstrip(),
-            "",
-        ]
-    )
+    lines = [
+        f"# {metadata['title']}",
+        "",
+        "## 播客信息",
+        "",
+        f"- 频道：`{metadata['channel']}`",
+        f"- 发布日期：`{metadata['pub_date']}`",
+        f"- 摘要：{metadata['summary'] or '无'}",
+        f"- 音频文件：`{metadata['audio_file']}`",
+        f"- 公开 notes 文件：`{metadata['notes_file']}`",
+        f"- TTS：`{tts_backend}`",
+        f"- Edge 声音：`{edge_voice}`",
+        f"- Edge 语速：`{edge_rate}`",
+        "",
+        "## 研究文档",
+        "",
+        notes_text.rstrip(),
+        "",
+    ]
+    if include_speech:
+        lines.extend(
+            [
+                "## 播报稿",
+                "",
+                speech_text.rstrip(),
+                "",
+            ]
+        )
+    return "\n".join(lines)
+
+
+def should_publish_script(channel: str) -> bool:
+    return channel != "ai-daily"
 
 
 def main() -> None:
@@ -117,8 +135,8 @@ def main() -> None:
     parser.add_argument("--edge-volume", default=EDGE_TTS_VOLUME)
     args = parser.parse_args()
 
-    date_text = args.date or datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    slug = f"{date_text}-{slugify(args.title)}"
+    date_text = args.date or date.today().isoformat()
+    slug = episode_slug(date_text, args.title)
     root = channel_dir(args.channel)
     notes_dir = root / "notes"
     episodes_dir = root / "episodes"
@@ -134,7 +152,9 @@ def main() -> None:
     speech_text = args.script_file.read_text(encoding="utf-8")
 
     (notes_dir / notes_name).write_text(notes_text, encoding="utf-8")
-    (notes_dir / script_name).write_text(speech_text, encoding="utf-8")
+    publish_script = should_publish_script(args.channel)
+    if publish_script:
+        (notes_dir / script_name).write_text(speech_text, encoding="utf-8")
 
     if args.audio_file:
         shutil.copyfile(args.audio_file, episodes_dir / audio_name)
@@ -162,9 +182,10 @@ def main() -> None:
         "summary": args.summary,
         "pub_date": pub_date,
         "notes_file": notes_name,
-        "script_file": script_name,
         "audio_file": audio_name,
     }
+    if publish_script:
+        metadata["script_file"] = script_name
     (notes_dir / metadata_name).write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8")
     archive_dir = ARCHIVE_DIR / args.channel
     archive_dir.mkdir(parents=True, exist_ok=True)
@@ -174,6 +195,7 @@ def main() -> None:
             metadata=metadata,
             notes_text=notes_text,
             speech_text=speech_text,
+            include_speech=publish_script,
             tts_backend=args.tts_backend,
             edge_voice=args.edge_voice,
             edge_rate=args.edge_rate,

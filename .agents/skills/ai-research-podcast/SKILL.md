@@ -12,6 +12,7 @@ Use this skill to produce a publishable podcast episode from this repository.
 - Never commit `.env`, API keys, private feed URLs, or the real random podcast path into README or public docs.
 - `docs/` is public once pushed to GitHub Pages.
 - `archive/` is local-only and ignored by git. Every generated episode should leave a Markdown archive document there.
+- For `ai-daily`, keep only the news notes in published notes and local archives. The speech file is only a TTS input and must not be published or archived.
 - Use placeholders in committed instructions and read real publishing configuration from local `.env`.
 
 ## Setup Check
@@ -54,6 +55,7 @@ Default TTS backend is free Edge TTS (`TTS_BACKEND=edge`). Use OpenAI only when 
 4. Verify:
    - Confirm the command produced an MP3 under `docs/.../<channel>/episodes/`.
    - Confirm the command printed an `archive` path under `archive/<channel>/`.
+   - For `ai-daily`, confirm filenames do not repeat the date and no `.speech.txt` file was written under `docs/.../ai-daily/notes/`.
    - Confirm the generated MP3 is close to the requested target duration.
    - Confirm `docs/.../<channel>/feed.xml` contains the new item.
    - Run `.venv/bin/python scripts/doctor.py`.
@@ -91,4 +93,5 @@ Install the 07:30 local-time launchd job with:
 - Target length: about 20 minutes unless the user requests otherwise.
 - Spoken script: Mandarin Chinese, calm technical analyst tone, no Markdown tables.
 - Notes: Markdown with source links and enough structure for later review.
+- AI daily archive documents contain news notes only. Research archive documents may include the spoken script.
 - Summary: one sentence suitable for RSS clients.

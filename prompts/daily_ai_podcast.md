@@ -23,6 +23,7 @@ Create:
 - `tmp/<YYYY-MM-DD>-ai-daily-research-speech.txt`
 
 The notes file must include source links. The speech file should be natural spoken Mandarin, not a Markdown article.
+The speech file is only an input for audio generation. AI daily publishing and local archives keep the news notes only; they must not publish or archive the spoken script.
 
 ## Episode Command
 
@@ -47,7 +48,8 @@ ffprobe -v error -show_entries format=duration,size -of default=nw=1 <generated-
 ```
 
 Confirm the generated MP3 is roughly 18 to 23 minutes. If the duration is too short, expand the speech script before publishing.
-Confirm `scripts/new_episode.py` printed an `archive` path under `archive/ai-daily/`; this local archive document is intentionally not committed.
+Confirm `scripts/new_episode.py` printed an `archive` path under `archive/ai-daily/`; this local archive document is intentionally not committed and must not contain a `播报稿` section.
+Confirm generated ai-daily filenames follow `YYYY-MM-DD-ai研究日报.*` without a repeated date suffix.
 
 ## Publish
 
