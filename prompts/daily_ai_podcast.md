@@ -8,7 +8,9 @@ Create today's AI research daily podcast.
 
 - Time window: focus on the last 2 calendar days relative to the run date.
 - Coverage: include both international and China AI developments.
-- Topics: major AI company news, model releases, product launches, AI infrastructure, notable research papers, open-source projects, policy/safety/regulatory changes, and important business moves.
+- Editorial focus: prioritize technical changes and upgrades. Spend most of the report on model releases, capability improvements, architecture changes, inference/training efficiency, context length, multimodal systems, agent frameworks, AI infrastructure, developer tools, open-source projects, notable research papers, robotics/embodied AI, and concrete product features driven by new technology.
+- Policy/safety/regulatory/business items are secondary. Include them only when they materially affect model access, technical roadmaps, product launches, compute supply, open-source availability, or AI deployment.
+- Avoid letting policy or governance dominate the episode unless it is the largest AI story of the day and has clear technical consequences.
 - Prioritize primary and reliable sources. Use web search for current information.
 - Write Mandarin Chinese output.
 - Podcast target duration: about 20 minutes.
@@ -24,6 +26,18 @@ Create:
 
 The notes file must include source links. The speech file should be natural spoken Mandarin, not a Markdown article.
 The speech file is only an input for audio generation. AI daily publishing and local archives keep the news notes only; they must not publish or archive the spoken script.
+
+## Recommended Structure
+
+Use this order unless the day's news makes another order clearly better:
+
+1. 技术主线概览：用 2-3 条主线解释今天 AI 技术在往哪里变。
+2. 模型与能力升级：新模型、上下文、多模态、推理、工具使用、评测和限制。
+3. 工程与基础设施：训练/推理成本、芯片、云服务、数据、框架、部署方式。
+4. 开源与开发者生态：重要 repo、工具链、SDK、agent 框架、社区采用。
+5. 应用与产品技术变化：产品里的新能力，说明背后的技术增量。
+6. 研究论文与机器人/具身智能：只选有技术启发或产业信号的内容。
+7. 政策/商业补充：压缩呈现，只讲和技术路线或可用性相关的影响。
 
 ## Episode Command
 

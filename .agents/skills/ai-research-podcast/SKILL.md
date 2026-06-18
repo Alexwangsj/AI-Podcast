@@ -76,6 +76,8 @@ Do not commit `.env`, `.venv`, `tmp/`, `archive/`, or private local setup notes.
 
 For the recurring AI daily research podcast, use `prompts/daily_ai_podcast.md`.
 
+AI daily episodes should be technology-led. Prioritize model releases, capability upgrades, architecture, inference/training efficiency, context length, multimodal systems, agents, infrastructure, developer tools, open-source projects, research papers, and robotics/embodied AI. Policy, safety, regulation, and business news should be brief unless they directly change technical roadmaps, model access, compute supply, product launches, open-source availability, or deployment.
+
 The macOS scheduled runner is:
 
 ```bash
