@@ -1,0 +1,10 @@
+{
+  "guid": "research-2026-06-22-loop-agent-研究",
+  "channel": "research",
+  "title": "Loop Agent 研究 2026-06-22",
+  "summary": "解释 Loop Agent 的核心架构、常见实现、适用场景、风险边界和工程落地方式的10分钟中文研究播报。",
+  "pub_date": "2026-06-22T09:10:58+00:00",
+  "notes_file": "2026-06-22-loop-agent-研究.md",
+  "audio_file": "2026-06-22-loop-agent-研究.mp3",
+  "script_file": "2026-06-22-loop-agent-研究.speech.txt"
+}
